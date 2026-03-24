@@ -4,7 +4,10 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+  <meta name="apple-mobile-web-app-title" content="Oração"/>
   <meta name="theme-color" content="#FFFFFF"/>
+  <link rel="manifest" href="manifest.json"/>
   <title>Pedidos de Oração</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -365,6 +368,73 @@
     }
     .fv .ref{display:block;margin-top:3px;font-style:normal;font-weight:600;font-size:9px;color:#DDD9D0}
 
+    /* ── INSTALL BANNER ── */
+    .install-bar{
+      display:none;
+      position:fixed;bottom:0;left:0;right:0;
+      background:var(--white);
+      border-top:1px solid var(--border);
+      padding:14px 20px;
+      z-index:250;
+      align-items:center;
+      gap:12px;
+      box-shadow:0 -4px 20px rgba(26,29,38,.06);
+      max-width:600px;
+      margin:0 auto;
+    }
+    .install-bar.show{display:flex}
+    .install-bar .ib-icon{font-size:28px;flex-shrink:0}
+    .install-bar .ib-text{flex:1;min-width:0}
+    .install-bar .ib-title{font-size:13px;font-weight:700;color:var(--text)}
+    .install-bar .ib-sub{font-size:11px;color:var(--text3);margin-top:1px}
+    .install-bar .ib-btn{
+      padding:9px 16px;border-radius:var(--rr);border:none;
+      background:var(--navy);color:#fff;
+      font-family:inherit;font-size:12px;font-weight:600;
+      cursor:pointer;white-space:nowrap;flex-shrink:0;
+      transition:all .2s;
+    }
+    .install-bar .ib-btn:hover{background:#333E50}
+    .install-bar .ib-close{
+      background:none;border:none;cursor:pointer;
+      color:var(--text3);font-size:18px;padding:2px;
+      line-height:1;flex-shrink:0;
+    }
+
+    /* iOS install modal */
+    .ios-modal{
+      display:none;position:fixed;inset:0;
+      background:rgba(26,29,38,.4);
+      backdrop-filter:blur(4px);z-index:500;
+      align-items:flex-end;justify-content:center;
+    }
+    .ios-modal.open{display:flex}
+    .ios-box{
+      background:var(--white);border-radius:20px 20px 0 0;
+      padding:8px 24px 36px;width:100%;max-width:520px;
+      animation:su .3s cubic-bezier(.16,1,.3,1);
+    }
+    .ios-handle{width:36px;height:4px;border-radius:4px;background:var(--border);margin:8px auto 18px}
+    .ios-box h3{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
+    .ios-box .ios-sub{font-size:12px;color:var(--text3);margin-bottom:20px}
+    .ios-step{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}
+    .ios-step .is-num{
+      width:24px;height:24px;min-width:24px;border-radius:50%;
+      background:var(--navy);color:#fff;
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;font-weight:700;margin-top:1px;
+    }
+    .ios-step .is-text{font-size:13px;color:var(--text);line-height:1.5}
+    .ios-step .is-text strong{font-weight:700}
+    .ios-step .is-text .is-icon{font-size:16px;vertical-align:middle}
+    .ios-close{
+      width:100%;padding:13px;border-radius:var(--rr);border:none;
+      background:var(--bg);color:var(--text);font-family:inherit;
+      font-size:13px;font-weight:600;cursor:pointer;margin-top:4px;
+      transition:all .2s;
+    }
+    .ios-close:hover{background:var(--border)}
+
     @media(max-width:480px){
       .hdr{padding:40px 16px 14px}
       .hdr h1{font-size:20px}
@@ -425,6 +495,39 @@
 </div>
 
 <button class="fab locked-fab" id="fab">+</button>
+
+<!-- Install banner -->
+<div class="install-bar" id="installBar">
+  <div class="ib-icon">🙏</div>
+  <div class="ib-text">
+    <div class="ib-title">Adicionar à tela inicial</div>
+    <div class="ib-sub">Acesse como um app, sem navegador</div>
+  </div>
+  <button class="ib-btn" id="installBtn">Instalar</button>
+  <button class="ib-close" id="installClose">✕</button>
+</div>
+
+<!-- iOS install instructions -->
+<div class="ios-modal" id="iosModal">
+  <div class="ios-box">
+    <div class="ios-handle"></div>
+    <h3>Adicionar à tela inicial</h3>
+    <div class="ios-sub">Siga os passos abaixo no Safari</div>
+    <div class="ios-step">
+      <div class="is-num">1</div>
+      <div class="is-text">Toque no botão de compartilhar <span class="is-icon">⬆️</span> na barra inferior do Safari</div>
+    </div>
+    <div class="ios-step">
+      <div class="is-num">2</div>
+      <div class="is-text">Role para baixo e toque em <strong>"Adicionar à Tela de Início"</strong></div>
+    </div>
+    <div class="ios-step">
+      <div class="is-num">3</div>
+      <div class="is-text">Toque em <strong>"Adicionar"</strong> no canto superior direito</div>
+    </div>
+    <button class="ios-close" id="iosClose">Entendido</button>
+  </div>
+</div>
 
 <!-- Add modal -->
 <div class="ov" id="aO">
@@ -719,6 +822,58 @@ function cCf(){di=null;cOv.classList.remove("open")}
 document.getElementById("cC").addEventListener("click",cCf);
 cOv.addEventListener("click",e=>{if(e.target===cOv)cCf()});
 document.getElementById("cD").addEventListener("click",()=>{if(di!==null){D=D.filter(r=>r.id!==di);sv();render()}cCf()});
+
+// ── PWA INSTALL ──
+let deferredPrompt=null;
+const installBar=document.getElementById("installBar");
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.navigator.standalone;
+const isAndroid=window.matchMedia("(display-mode: browser)").matches&&/android/i.test(navigator.userAgent);
+
+// Show banner if not already installed
+function showInstallBar(){
+  if(!window.navigator.standalone&&!localStorage.getItem("pwa_dismissed")){
+    installBar.classList.add("show");
+    // move fab up so it's not hidden behind banner
+    document.getElementById("fab").style.bottom="88px";
+  }
+}
+
+// Android: catch install prompt
+window.addEventListener("beforeinstallprompt",e=>{
+  e.preventDefault();deferredPrompt=e;showInstallBar();
+});
+
+// iOS: show if in Safari and not installed
+if(isIOS) showInstallBar();
+
+document.getElementById("installBtn").addEventListener("click",async()=>{
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    const r=await deferredPrompt.userChoice;
+    if(r.outcome==="accepted"){installBar.classList.remove("show");document.getElementById("fab").style.bottom="";}
+    deferredPrompt=null;
+  } else {
+    // iOS: show instructions
+    document.getElementById("iosModal").classList.add("open");
+  }
+});
+
+document.getElementById("installClose").addEventListener("click",()=>{
+  installBar.classList.remove("show");
+  document.getElementById("fab").style.bottom="";
+  localStorage.setItem("pwa_dismissed","1");
+});
+document.getElementById("iosClose").addEventListener("click",()=>{
+  document.getElementById("iosModal").classList.remove("open");
+});
+document.getElementById("iosModal").addEventListener("click",e=>{
+  if(e.target===document.getElementById("iosModal"))document.getElementById("iosModal").classList.remove("open");
+});
+
+// Hide banner if already running as PWA
+if(window.navigator.standalone||window.matchMedia("(display-mode:standalone)").matches){
+  installBar.classList.remove("show");
+}
 </script>
 </body>
 </html>
