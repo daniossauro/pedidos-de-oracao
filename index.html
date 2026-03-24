@@ -58,6 +58,8 @@
       font-weight:500;
       margin-top:2px;
     }
+    .hdr-title-row{display:flex;align-items:center;gap:10px}
+    .hdr-logo{width:22px;height:auto;flex-shrink:0;opacity:0.55}
 
     /* Lock button */
     .lock-btn{
@@ -458,8 +460,13 @@
 <header class="hdr">
   <div class="hdr-inner">
     <div>
-      <h1>Pedidos de Oração</h1>
-      <div class="hdr-sub">Organizador de intercessão</div>
+      <div class="hdr-title-row">
+        <svg class="hdr-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 287.37 400"><path fill="#231f20" d="M281.79,0l-139.8,141.99L0,70.99,281.79,0ZM170,400l-21.73-249.95,53.04-53.87L287.37,8.78l-117.36,391.22Z"/></svg>
+        <div>
+          <h1>Pedidos de Oração</h1>
+          <div class="hdr-sub">Intercessão da Vértice</div>
+        </div>
+      </div>
       <div class="stats">
         <div class="st st-total"><span class="num" id="sT">0</span><span class="lbl">pedidos</span></div>
         <div class="st st-pend"><span class="num" id="sP">0</span><span class="lbl">orando</span></div>
