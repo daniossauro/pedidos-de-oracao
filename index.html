@@ -7,22 +7,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --purple-100: #f3e8ff;
-    --purple-200: #e9d5ff;
-    --purple-300: #d8b4fe;
-    --purple-400: #c084fc;
-    --purple-500: #a855f7;
-    --purple-600: #9333ea;
-    --purple-700: #7e22ce;
-    --pink-400: #f472b6;
-    --pink-500: #ec4899;
-    --bg: #faf5ff;
+    --bg: #f7f5f2;
     --card: #ffffff;
-    --text: #1e1b2e;
-    --text-muted: #8b85a0;
-    --text-visited: #a78bfa;
-    --shadow: 0 2px 12px rgba(120, 60, 180, 0.08);
-    --shadow-lg: 0 8px 30px rgba(120, 60, 180, 0.12);
+    --text: #1a1a1a;
+    --text-muted: #8c8578;
+    --text-visited: #b0a898;
+    --accent: #3d3529;
+    --accent-light: #c7bfb3;
+    --accent-lighter: #e8e2da;
+    --accent-warm: #a89279;
+    --shadow: 0 2px 12px rgba(30, 25, 18, 0.06);
+    --shadow-lg: 0 8px 30px rgba(30, 25, 18, 0.10);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,16 +28,17 @@
     min-height: 100vh;
     color: var(--text);
     padding-bottom: 100px;
+    -webkit-font-smoothing: antialiased;
   }
 
   .header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 40%, #ec4899 100%);
+    background: linear-gradient(145deg, #1a1a1a 0%, #2d2820 50%, #3d3529 100%);
     padding: 20px 20px 24px;
     border-radius: 0 0 28px 28px;
-    box-shadow: 0 8px 32px rgba(120, 40, 180, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
   }
 
   .header-top {
@@ -53,16 +49,15 @@
   }
 
   .header-title {
-    color: white;
-    font-size: 13px;
+    color: var(--accent-light);
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    opacity: 0.85;
   }
 
   .header h1 {
-    color: white;
+    color: #fff;
     font-size: 28px;
     font-weight: 800;
     line-height: 1.2;
@@ -71,95 +66,138 @@
   .header h1 span {
     font-weight: 500;
     font-size: 15px;
-    opacity: 0.8;
+    opacity: 0.6;
     margin-left: 8px;
   }
 
   .progress-bar {
-    margin-top: 16px;
-    background: rgba(255,255,255,0.2);
+    margin-top: 14px;
+    background: rgba(255,255,255,0.1);
     border-radius: 100px;
-    height: 6px;
+    height: 5px;
     overflow: hidden;
   }
 
   .progress-fill {
     height: 100%;
-    background: white;
+    background: var(--accent-light);
     border-radius: 100px;
     transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     width: 0%;
   }
 
   .progress-text {
-    color: rgba(255,255,255,0.85);
-    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
     font-weight: 500;
     margin-top: 8px;
     text-align: right;
   }
 
+  /* ── Tabs ── */
   .tabs {
     display: flex;
-    gap: 8px;
-    padding: 16px 20px 4px;
+    gap: 6px;
+    padding: 14px 16px 6px;
     position: sticky;
-    top: 130px;
+    top: 133px;
     z-index: 90;
     background: var(--bg);
   }
 
   .tab {
     flex: 1;
-    padding: 10px 16px;
+    padding: 10px 10px;
     border: none;
     border-radius: 14px;
     font-family: 'Inter', sans-serif;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .tab.active-todo {
-    background: linear-gradient(135deg, #7c3aed, #a855f7);
-    color: white;
-    box-shadow: 0 4px 16px rgba(120, 40, 180, 0.3);
+  .tab.active {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   }
 
-  .tab.active-done {
-    background: linear-gradient(135deg, #a855f7, #ec4899);
-    color: white;
-    box-shadow: 0 4px 16px rgba(200, 60, 140, 0.3);
+  .tab.active-help {
+    background: var(--accent-warm);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(168, 146, 121, 0.3);
   }
 
   .tab.inactive {
-    background: white;
+    background: #fff;
     color: var(--text-muted);
     box-shadow: var(--shadow);
   }
 
-  .list {
-    padding: 12px 16px;
-  }
-
-  .section-label {
+  .counter-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 2px 8px;
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    padding: 16px 8px 8px;
+    margin-left: 4px;
   }
+
+  .tab.inactive .counter-badge {
+    background: var(--accent-lighter);
+    color: var(--accent);
+  }
+
+  /* ── Filters ── */
+  .filters {
+    display: flex;
+    gap: 6px;
+    padding: 10px 16px 4px;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .filters::-webkit-scrollbar { display: none; }
+
+  .filter-chip {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    border-radius: 100px;
+    border: 1.5px solid var(--accent-lighter);
+    background: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+    white-space: nowrap;
+  }
+
+  .filter-chip.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  }
+
+  /* ── List ── */
+  .list { padding: 8px 16px; }
 
   .item {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     background: var(--card);
-    border-radius: 18px;
-    padding: 16px 18px;
+    border-radius: 16px;
+    padding: 14px 16px;
     margin-bottom: 10px;
     box-shadow: var(--shadow);
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -172,48 +210,40 @@
   .item::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(180deg, var(--purple-400), var(--pink-400));
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent-warm);
     opacity: 0;
     transition: opacity 0.3s ease;
   }
 
-  .item:hover::before,
-  .item:active::before {
-    opacity: 1;
-  }
-
-  .item:active {
-    transform: scale(0.98);
-  }
+  .item:active { transform: scale(0.98); }
+  .item:hover::before, .item:active::before { opacity: 1; }
 
   .item.visited {
-    background: linear-gradient(135deg, rgba(168,85,247,0.06), rgba(236,72,153,0.06));
+    background: #faf8f5;
   }
-
   .item.visited .item-name {
     color: var(--text-visited);
+    text-decoration: line-through;
+    text-decoration-color: var(--accent-lighter);
   }
 
   .checkbox {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    border: 2.5px solid var(--purple-300);
+    border: 2px solid var(--accent-light);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     transition: all 0.3s ease;
-    position: relative;
   }
 
   .checkbox.checked {
     border-color: transparent;
-    background: linear-gradient(135deg, #a855f7, #ec4899);
+    background: var(--accent);
     animation: checkPop 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -225,45 +255,48 @@
   }
 
   .checkbox svg {
-    width: 14px;
-    height: 14px;
-    opacity: 0;
-    transform: scale(0);
+    width: 13px; height: 13px;
+    opacity: 0; transform: scale(0);
     transition: all 0.25s ease;
   }
+  .checkbox.checked svg { opacity: 1; transform: scale(1); }
 
-  .checkbox.checked svg {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .item-content {
-    flex: 1;
-    min-width: 0;
-  }
+  .item-content { flex: 1; min-width: 0; }
 
   .item-name {
-    font-size: 15px;
+    font-size: 14.5px;
     font-weight: 600;
     color: var(--text);
     transition: color 0.3s ease;
     line-height: 1.3;
   }
 
-  .item-address {
-    font-size: 12px;
+  .item-sub {
+    font-size: 11px;
     color: var(--text-muted);
     margin-top: 3px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .item-sub .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-weight: 500;
+  }
+
+  .item-sub .tag svg {
+    width: 11px; height: 11px;
+    flex-shrink: 0;
   }
 
   .map-btn {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-    background: var(--purple-100);
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--accent-lighter);
     border: none;
     display: flex;
     align-items: center;
@@ -274,85 +307,191 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  .map-btn:hover {
-    background: linear-gradient(135deg, #a855f7, #ec4899);
+  .map-btn:hover, .map-btn:active {
+    background: var(--accent);
     transform: scale(1.08);
-    box-shadow: 0 4px 16px rgba(168, 85, 247, 0.35);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
   }
 
-  .map-btn:hover svg path {
-    fill: white;
-  }
-
-  .map-btn svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .map-btn svg path {
-    fill: var(--purple-500);
-    transition: fill 0.3s ease;
-  }
+  .map-btn svg { width: 16px; height: 16px; }
+  .map-btn svg path { fill: var(--accent); transition: fill 0.3s ease; }
+  .map-btn:hover svg path, .map-btn:active svg path { fill: #fff; }
 
   .empty-state {
     text-align: center;
     padding: 48px 24px;
     color: var(--text-muted);
   }
-
-  .empty-state .emoji {
-    font-size: 48px;
-    margin-bottom: 12px;
-  }
-
-  .empty-state p {
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  .counter-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.25);
-    border-radius: 100px;
-    padding: 2px 10px;
-    font-size: 12px;
-    font-weight: 600;
-    color: white;
-    margin-left: 4px;
-  }
+  .empty-state .emoji { font-size: 44px; margin-bottom: 12px; }
+  .empty-state p { font-size: 14px; font-weight: 500; }
 
   .item.entering {
     animation: slideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
-
   @keyframes slideIn {
-    from { opacity: 0; transform: translateY(12px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .number {
-    width: 22px;
-    height: 22px;
-    border-radius: 7px;
-    background: var(--purple-100);
-    color: var(--purple-600);
+  /* ── Chat ── */
+  .chat-container { padding: 12px 16px; display: none; }
+  .chat-container.visible { display: block; }
+
+  .api-key-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+    margin-bottom: 14px;
+  }
+
+  .api-key-box label {
     font-size: 11px;
     font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .api-key-box p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .api-key-box a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .api-key-row { display: flex; gap: 8px; }
+
+  .api-key-input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1.5px solid var(--accent-lighter);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #fff;
+  }
+  .api-key-input:focus { border-color: var(--accent-warm); }
+
+  .api-key-btn {
+    padding: 10px 18px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
     flex-shrink: 0;
   }
 
-  .item.visited .number {
-    background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(236,72,153,0.15));
-    color: var(--pink-500);
+  .api-key-status { font-size: 11px; margin-top: 8px; font-weight: 500; }
+  .api-key-status.ok { color: #5a8a5a; }
+  .api-key-status.err { color: #c45050; }
+
+  .chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 55vh;
+    overflow-y: auto;
+    padding: 4px 0 14px;
   }
 
+  .chat-bubble {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    animation: slideIn 0.3s ease;
+  }
+
+  .chat-bubble.bot {
+    background: #fff;
+    box-shadow: var(--shadow);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    color: var(--text);
+  }
+
+  .chat-bubble.user {
+    background: var(--accent);
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+
+  .chat-bubble.typing::after {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 4px;
+    background: var(--accent-warm);
+    border-radius: 50%;
+    animation: typing 1s infinite;
+    margin-left: 4px;
+  }
+  @keyframes typing {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  .chat-input-row {
+    display: flex;
+    gap: 8px;
+    position: sticky;
+    bottom: 0;
+    background: var(--bg);
+    padding: 8px 0 4px;
+  }
+
+  .chat-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1.5px solid var(--accent-lighter);
+    border-radius: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.2s;
+  }
+  .chat-input:focus { border-color: var(--accent-warm); }
+
+  .chat-send {
+    width: 46px; height: 46px;
+    border-radius: 14px;
+    background: var(--accent);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .chat-send:active { transform: scale(0.93); }
+  .chat-send:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.18); }
+  .chat-send svg { width: 20px; height: 20px; fill: #fff; }
+
   @media (min-width: 500px) {
-    body { max-width: 430px; margin: 0 auto; box-shadow: 0 0 60px rgba(0,0,0,0.08); min-height: 100vh; }
+    body {
+      max-width: 430px;
+      margin: 0 auto;
+      box-shadow: 0 0 60px rgba(0,0,0,0.06);
+      min-height: 100vh;
+    }
   }
 </style>
 </head>
@@ -361,7 +500,7 @@
 <div class="header">
   <div class="header-top">
     <span class="header-title">Checklist de Viagem</span>
-    <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="rgba(255,255,255,0.7)"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg>
+    <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="rgba(199,191,179,0.5)"/><circle cx="12" cy="9" r="2.5" fill="rgba(199,191,179,0.8)"/></svg>
   </div>
   <h1>Curitiba <span id="counter"></span></h1>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -369,76 +508,136 @@
 </div>
 
 <div class="tabs">
-  <button class="tab active-todo" id="tabTodo" onclick="switchTab('todo')">A Visitar</button>
+  <button class="tab active" id="tabTodo" onclick="switchTab('todo')">A Visitar</button>
   <button class="tab inactive" id="tabDone" onclick="switchTab('done')">Visitados</button>
+  <button class="tab inactive" id="tabHelp" onclick="switchTab('help')">Ajuda IA</button>
+</div>
+
+<div class="filters" id="filtersBar">
+  <button class="filter-chip active" onclick="setFilter('alpha')">Ordem alfabética</button>
+  <button class="filter-chip" onclick="setFilter('near')">Mais perto do hotel</button>
+  <button class="filter-chip" onclick="setFilter('night')">Aberto à noite</button>
 </div>
 
 <div class="list" id="list"></div>
 
+<div class="chat-container" id="chatContainer">
+  <div class="api-key-box" id="apiKeyBox">
+    <label>Chave da API Gemini</label>
+    <p>Para usar o assistente, insira sua chave gratuita do Gemini.
+       <a href="https://aistudio.google.com/apikey" target="_blank">Obter chave &rarr;</a></p>
+    <div class="api-key-row">
+      <input type="password" class="api-key-input" id="apiKeyInput" placeholder="Cole sua chave aqui...">
+      <button class="api-key-btn" onclick="saveApiKey()">Salvar</button>
+    </div>
+    <div class="api-key-status" id="apiKeyStatus"></div>
+  </div>
+
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-bubble bot">
+      Olá! Sou seu guia de Curitiba. Pergunte sobre os lugares da sua lista: horários, o que visitar primeiro, o que fica perto, dicas e muito mais!
+    </div>
+  </div>
+
+  <div class="chat-input-row">
+    <input type="text" class="chat-input" id="chatInput" placeholder="Pergunte sobre os lugares..."
+           onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-send" onclick="sendChat()">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
 <script>
+const HOTEL = { lat: -25.4380, lng: -49.2670 };
+
 const places = [
-  { id: 0, name: "Teatro Guaíra", address: "Praça Santos Andrade, Centro", query: "Teatro Guaíra Curitiba" },
-  { id: 1, name: "Mercado Municipal", address: "Av. Sete de Setembro, 1865", query: "Mercado Municipal de Curitiba" },
-  { id: 2, name: "Rua das Flores", address: "Rua XV de Novembro, Centro", query: "Rua das Flores Rua XV de Novembro Curitiba" },
-  { id: 3, name: "Biblioteca Pública", address: "Rua Cândido Lopes, 133", query: "Biblioteca Pública do Paraná Curitiba" },
-  { id: 4, name: "Passeio Público", address: "Rua Luiz Leão, Centro", query: "Passeio Público Curitiba" },
-  { id: 5, name: "Cine Passeio", address: "Rua Riachuelo, 410", query: "Cine Passeio Curitiba" },
-  { id: 6, name: "Centro Histórico", address: "Largo da Ordem, São Francisco", query: "Largo da Ordem Curitiba" },
-  { id: 7, name: "Paço da Liberdade", address: "Praça Generoso Marques, 189", query: "Paço da Liberdade Curitiba" },
-  { id: 8, name: "Feira do Largo", address: "Praça Garibaldi, São Francisco", query: "Feira do Largo da Ordem Curitiba" },
-  { id: 9, name: "Rua Saldanha Marinho", address: "Centro, próx. à Catedral", query: "Rua Saldanha Marinho Curitiba Centro" },
-  { id: 10, name: "Rua 24 Horas", address: "Rua Visconde de Nácar, Centro", query: "Rua 24 Horas Curitiba" },
-  { id: 11, name: "Jardim Botânico", address: "R. Eng. Ostoja Roguski, 350", query: "Jardim Botânico de Curitiba" },
-  { id: 12, name: "Museu Oscar Niemeyer", address: "Rua Mal. Hermes, 999", query: "Museu Oscar Niemeyer Curitiba" },
-  { id: 13, name: "Bosque do Papa", address: "Rua Mateus Leme, Centro Cívico", query: "Bosque do Papa Memorial Polonês Curitiba" },
-  { id: 14, name: "Torre Panorâmica", address: "R. Prof. Lycio G. C. Vellozo, 191", query: "Torre Panorâmica Curitiba" },
-  { id: 15, name: "Bosque Alemão", address: "Rua Niccolo Paganini, Vista Alegre", query: "Bosque Alemão Curitiba" },
-  { id: 16, name: "Parque Barigui", address: "Av. Cândido Hartmann, Santo Inácio", query: "Parque Barigui Curitiba" },
-  { id: 17, name: "Parque Tingui", address: "Av. Fredolin Wolf, São João", query: "Parque Tingui Memorial Ucraniano Curitiba" },
-  { id: 18, name: "Ópera de Arame", address: "Rua João Gava, 920, Abranches", query: "Ópera de Arame Curitiba" },
-  { id: 19, name: "UNILIVRE", address: "Rua Victor Benato, 210, Pilarzinho", query: "Universidade Livre do Meio Ambiente Curitiba" },
-  { id: 20, name: "Parque Tanguá", address: "R. Oswaldo Maciel, 97, Pilarzinho", query: "Parque Tanguá Curitiba" },
-  { id: 21, name: "Santa Felicidade", address: "Av. Manoel Ribas, Portal Italiano", query: "Portal Italiano Santa Felicidade Curitiba" }
+  { id: 0, name: "Jardim Botânico", link: "https://maps.app.goo.gl/i3gqFfbgjMGnbw849", lat: -25.4411, lng: -49.2362, hours: "6h–19h30", closes: 19.5, openNight: false },
+  { id: 1, name: "Praça do Japão", link: "https://maps.app.goo.gl/3XwT1siW5qdpShYP7", lat: -25.4464, lng: -49.2876, hours: "Aberta 24h", closes: 24, openNight: true },
+  { id: 2, name: "Feira do Largo da Ordem", link: "https://maps.app.goo.gl/DBDB2KAkhoXjJb9j9", lat: -25.4232, lng: -49.2737, hours: "Dom., 9h–14h", closes: 14, openNight: false },
+  { id: 3, name: "Feira de Artes e Artesanato", link: "https://maps.app.goo.gl/hjf1WqckxwAse4V79", lat: -25.4236, lng: -49.2732, hours: "Sáb. e Dom., 9h–15h", closes: 15, openNight: false },
+  { id: 4, name: "Parque Tanguá", link: "https://maps.app.goo.gl/icBtfyXPvbk3Corx8", lat: -25.3795, lng: -49.2827, hours: "8h–18h", closes: 18, openNight: false },
+  { id: 5, name: "Bosque Alemão", link: "https://maps.app.goo.gl/ypn8AXgKxviGbFx97", lat: -25.4061, lng: -49.2856, hours: "8h–18h", closes: 18, openNight: false },
+  { id: 6, name: "Teatro HSBC", link: "https://maps.app.goo.gl/CD5BLzTdHN21eTFy6", lat: -25.4325, lng: -49.2712, hours: "Conforme programação", closes: 23, openNight: true },
+  { id: 7, name: "Praça da Espanha", link: "https://maps.app.goo.gl/Pbfyni4j9FCyyLnR6", lat: -25.4351, lng: -49.2863, hours: "Aberta 24h", closes: 24, openNight: true },
+  { id: 8, name: "Museu Alfredo Andersen", link: "https://maps.app.goo.gl/ZDFyqSbYvtg2nZDN7", lat: -25.4210, lng: -49.2710, hours: "Ter.–Dom., 10h–17h", closes: 17, openNight: false },
+  { id: 9, name: "Ópera de Arame", link: "https://maps.app.goo.gl/urbBfi7wHS3MqGjE8", lat: -25.3844, lng: -49.2766, hours: "Ter.–Dom., 10h–18h", closes: 18, openNight: false },
+  { id: 10, name: "Mercado das Pulgas", link: "https://maps.app.goo.gl/d9HzxE6EvcTCazJ98", lat: -25.4376, lng: -49.2750, hours: "Seg.–Sáb., 9h–18h", closes: 18, openNight: false },
+  { id: 11, name: "Museu Oscar Niemeyer", link: "https://maps.app.goo.gl/186odFa1YqvsAJF86", lat: -25.4102, lng: -49.2661, hours: "Ter.–Dom., 10h–18h", closes: 18, openNight: false },
+  { id: 12, name: "Centro Histórico", link: "https://maps.app.goo.gl/9eFqGyqKubUiH6qC9", lat: -25.4278, lng: -49.2722, hours: "Área aberta 24h", closes: 24, openNight: true },
+  { id: 13, name: "Torre Panorâmica", link: "https://maps.app.goo.gl/Hn45YvjGxwh7Sv3X8", lat: -25.4242, lng: -49.2944, hours: "Ter.–Dom., 10h–18h", closes: 18, openNight: false }
 ];
 
-let visited = JSON.parse(localStorage.getItem('cwb_visited') || '[]');
+let visited = JSON.parse(localStorage.getItem('cwb_v3') || '[]');
 let currentTab = 'todo';
+let currentFilter = 'alpha';
 
-function save() {
-  localStorage.setItem('cwb_visited', JSON.stringify(visited));
-}
-
-function isVisited(id) {
-  return visited.includes(id);
-}
+function save() { localStorage.setItem('cwb_v3', JSON.stringify(visited)); }
+function isVisited(id) { return visited.includes(id); }
 
 function toggle(id) {
-  if (visited.includes(id)) {
-    visited = visited.filter(v => v !== id);
-  } else {
-    visited.push(id);
-  }
+  if (visited.includes(id)) visited = visited.filter(v => v !== id);
+  else visited.push(id);
   save();
   render();
 }
 
-function openMap(e, query) {
+function openMap(e, link) {
   e.stopPropagation();
-  window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`, '_blank');
+  window.open(link, '_blank');
+}
+
+function haversine(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat/2)**2 +
+            Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) *
+            Math.sin(dLon/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+function distFromHotel(p) {
+  return haversine(HOTEL.lat, HOTEL.lng, p.lat, p.lng);
+}
+
+function sortPlaces(list, filter) {
+  const copy = [...list];
+  switch (filter) {
+    case 'alpha':
+      return copy.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
+    case 'near':
+      return copy.sort((a, b) => distFromHotel(a) - distFromHotel(b));
+    case 'night':
+      return copy.filter(p => p.openNight).sort((a, b) => b.closes - a.closes);
+    default:
+      return copy;
+  }
 }
 
 function switchTab(tab) {
   currentTab = tab;
-  const tabTodo = document.getElementById('tabTodo');
-  const tabDone = document.getElementById('tabDone');
-  if (tab === 'todo') {
-    tabTodo.className = 'tab active-todo';
-    tabDone.className = 'tab inactive';
-  } else {
-    tabTodo.className = 'tab inactive';
-    tabDone.className = 'tab active-done';
-  }
+  document.getElementById('filtersBar').style.display = tab === 'help' ? 'none' : 'flex';
+  document.getElementById('list').style.display = tab === 'help' ? 'none' : 'block';
+  document.getElementById('chatContainer').className = tab === 'help' ? 'chat-container visible' : 'chat-container';
+  updateTabClasses();
+  if (tab !== 'help') render();
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
   render();
+}
+
+function updateTabClasses() {
+  ['tabTodo','tabDone','tabHelp'].forEach(id => {
+    document.getElementById(id).className = 'tab inactive';
+  });
+  if (currentTab === 'todo') document.getElementById('tabTodo').className = 'tab active';
+  else if (currentTab === 'done') document.getElementById('tabDone').className = 'tab active';
+  else document.getElementById('tabHelp').className = 'tab active-help';
 }
 
 function render() {
@@ -449,28 +648,29 @@ function render() {
 
   document.getElementById('counter').textContent = `${done}/${total}`;
   document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressText').textContent = pct === 100 ? 'Todos visitados!' : `${pct}% concluído`;
+  document.getElementById('progressText').textContent =
+    pct === 100 ? 'Todos visitados!' : `${pct}% concluído`;
 
-  const tabTodo = document.getElementById('tabTodo');
-  const tabDone = document.getElementById('tabDone');
-  tabTodo.innerHTML = `A Visitar <span class="counter-badge">${total - done}</span>`;
-  tabDone.innerHTML = `Visitados <span class="counter-badge">${done}</span>`;
+  document.getElementById('tabTodo').innerHTML =
+    `A Visitar <span class="counter-badge">${total - done}</span>`;
+  document.getElementById('tabDone').innerHTML =
+    `Visitados <span class="counter-badge">${done}</span>`;
+  document.getElementById('tabHelp').innerHTML = 'Ajuda IA';
+  updateTabClasses();
 
-  if (currentTab === 'todo') {
-    tabTodo.className = 'tab active-todo';
-    tabDone.className = 'tab inactive';
-  } else {
-    tabTodo.className = 'tab inactive';
-    tabDone.className = 'tab active-done';
-  }
-
-  const filtered = places.filter(p => currentTab === 'todo' ? !isVisited(p.id) : isVisited(p.id));
+  const base = places.filter(p =>
+    currentTab === 'todo' ? !isVisited(p.id) : isVisited(p.id)
+  );
+  const filtered = sortPlaces(base, currentFilter);
 
   if (filtered.length === 0) {
+    const isNight = currentFilter === 'night';
     list.innerHTML = `
       <div class="empty-state">
-        <div class="emoji">${currentTab === 'todo' ? '🎉' : '🗺️'}</div>
-        <p>${currentTab === 'todo' ? 'Todos os lugares foram visitados!' : 'Nenhum lugar visitado ainda'}</p>
+        <div class="emoji">${isNight ? '🌙' : currentTab === 'todo' ? '🎉' : '🗺️'}</div>
+        <p>${isNight ? 'Nenhum lugar aberto à noite nesta aba' :
+             currentTab === 'todo' ? 'Todos os lugares foram visitados!' :
+             'Nenhum lugar visitado ainda'}</p>
       </div>`;
     return;
   }
@@ -478,10 +678,11 @@ function render() {
   let html = '';
   filtered.forEach((p, i) => {
     const checked = isVisited(p.id);
-    const idx = places.indexOf(p) + 1;
+    const dist = distFromHotel(p);
+    const distLabel = dist < 1 ? `${Math.round(dist*1000)} m` : `${dist.toFixed(1)} km`;
+
     html += `
-      <div class="item ${checked ? 'visited' : ''} entering" style="animation-delay:${i * 40}ms" onclick="toggle(${p.id})">
-        <div class="number">${idx}</div>
+      <div class="item ${checked ? 'visited' : ''} entering" style="animation-delay:${i * 30}ms" onclick="toggle(${p.id})">
         <div class="checkbox ${checked ? 'checked' : ''}">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -489,9 +690,18 @@ function render() {
         </div>
         <div class="item-content">
           <div class="item-name">${p.name}</div>
-          <div class="item-address">${p.address}</div>
+          <div class="item-sub">
+            <span class="tag">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor" opacity="0.4"/></svg>
+              ${distLabel}
+            </span>
+            <span class="tag">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" opacity="0.4"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/></svg>
+              ${p.hours}
+            </span>
+          </div>
         </div>
-        <button class="map-btn" onclick="openMap(event, '${p.query.replace(/'/g, "\\'")}')">
+        <button class="map-btn" onclick="openMap(event, '${p.link}')">
           <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
         </button>
       </div>`;
@@ -500,6 +710,88 @@ function render() {
   list.innerHTML = html;
 }
 
+// ── Gemini Chat ──
+function getApiKey() { return localStorage.getItem('gemini_key') || ''; }
+
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key) return;
+  localStorage.setItem('gemini_key', key);
+  const s = document.getElementById('apiKeyStatus');
+  s.textContent = 'Chave salva com sucesso!';
+  s.className = 'api-key-status ok';
+  document.getElementById('apiKeyInput').value = '';
+  setTimeout(() => { s.textContent = ''; }, 3000);
+}
+
+function buildSystemPrompt() {
+  const items = places.map(p => {
+    const dist = distFromHotel(p);
+    const d = dist < 1 ? `${Math.round(dist*1000)} m` : `${dist.toFixed(1)} km`;
+    const st = isVisited(p.id) ? 'Visitado' : 'A visitar';
+    return `- ${p.name}: Horário: ${p.hours}. Distância do hotel: ${d}. Aberto à noite: ${p.openNight ? 'Sim' : 'Não'}. Status: ${st}. Link: ${p.link}`;
+  }).join('\n');
+
+  return `Você é um guia turístico especialista em Curitiba, Paraná, Brasil. O usuário está hospedado no Upper Residence Hotel, Rua XV de Novembro, 2050, Apto 605, Centro de Curitiba. Responda sempre em português do Brasil, de forma simpática e útil. Dê dicas práticas, recomende ordem de visita, informe horários, distâncias e curiosidades. Se perguntarem qual lugar fica mais perto, use as distâncias fornecidas. Aqui está a lista de lugares do checklist do usuário:\n\n${items}\n\nResponda de forma concisa e direta. Se não souber algo específico, diga que não tem certeza. Nunca invente horários ou informações.`;
+}
+
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  const key = getApiKey();
+  if (!key) {
+    const s = document.getElementById('apiKeyStatus');
+    s.textContent = 'Insira sua chave da API primeiro.';
+    s.className = 'api-key-status err';
+    return;
+  }
+
+  const msgs = document.getElementById('chatMessages');
+  msgs.innerHTML += `<div class="chat-bubble user">${esc(msg)}</div>`;
+  input.value = '';
+  msgs.innerHTML += `<div class="chat-bubble bot typing" id="typingBubble">Pensando...</div>`;
+  msgs.scrollTop = msgs.scrollHeight;
+
+  try {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: buildSystemPrompt() }] },
+          contents: [{ parts: [{ text: msg }] }],
+          generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+        })
+      }
+    );
+    const data = await res.json();
+    const tb = document.getElementById('typingBubble');
+    if (data.candidates && data.candidates[0]) {
+      const ans = data.candidates[0].content.parts[0].text;
+      tb.outerHTML = `<div class="chat-bubble bot">${fmt(ans)}</div>`;
+    } else {
+      const e = data.error ? data.error.message : 'Não foi possível obter uma resposta.';
+      tb.outerHTML = `<div class="chat-bubble bot">Erro: ${esc(e)}</div>`;
+    }
+  } catch (err) {
+    const tb = document.getElementById('typingBubble');
+    if (tb) tb.outerHTML = `<div class="chat-bubble bot">Erro de conexão. Verifique sua chave e tente novamente.</div>`;
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function esc(t) { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmt(t) {
+  let s = esc(t);
+  s = s.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/\n/g, '<br>');
+  return s;
+}
+
+if (getApiKey()) document.getElementById('apiKeyBox').style.display = 'none';
 render();
 </script>
 </body>
